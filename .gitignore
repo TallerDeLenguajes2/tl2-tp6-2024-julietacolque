@@ -1,0 +1,84 @@
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de usuario específicos de Visual Studio
+.vscode/
+.vs/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Archivos generados por la compilación
+bin/
+obj/
+Debug/
+Release/
+
+# Archivos de dependencias
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Configuración del sistema de paquetes de NuGet
+.nuget/
+*.nuspec
+*.psmdcp
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# Archivos de configuración de Rider y Visual Studio Code
+.idea/
+.vscode/
+
+# Archivos de configuración de Visual Studio y archivos temporales de depuración
+*.launchSettings.json
+*.ps1
+*.cmd
+
+# Archivos de configuración de la base de datos local
+*.mdf
+*.ldf
+*.sqlite
+*.sqlite3
+
+# Archivos de logs y dumps
+*.log
+*.tlog
+*.dmp
+
+# Archivos de seguridad y secretos
+secrets.json
+*.pfx
+*.key
+**/Properties/launchSettings.json
+
+# Archivos de publicaciones locales
+.publish/
+out/
+
+# Configuración de Yarn y NPM
+node_modules/
+yarn.lock
+package-lock.json
+
+# Archivos temporales
+*.tmp
+*.temp
+*.cache
+*.bak
+*.old
+*.swp
+
+# Archivos de dependencia externos
+lib/
+wwwroot/lib/
+
+# Otros
+_ReSharper.*

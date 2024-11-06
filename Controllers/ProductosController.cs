@@ -3,6 +3,9 @@ using tl2_tp6_2024_julietacolque.Models;
 using tl2_tp6_2024_julietacolque.Repository;
 namespace tl2_tp6_2024_julietacolque.Controllers;
 
+
+[ApiController]
+[Route("[controller]")]
 public class ProductosController : Controller
 {
     private readonly ProductosRepository repoProducto;
