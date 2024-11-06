@@ -4,8 +4,6 @@ using tl2_tp6_2024_julietacolque.Repository;
 namespace tl2_tp6_2024_julietacolque.Controllers;
 
 
-[ApiController]
-[Route("[controller]")]
 public class ProductosController : Controller
 {
     private readonly ProductosRepository repoProducto;
@@ -65,7 +63,7 @@ public class ProductosController : Controller
     {
         Console.WriteLine(IdProducto);
         repoProducto.EliminarProducto(IdProducto);
-        return RedirectToAction("index","Productos");
+        return RedirectToAction("index", "Productos");
     }
 
 
