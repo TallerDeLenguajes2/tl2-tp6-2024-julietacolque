@@ -44,7 +44,7 @@ public class ProductosController : Controller
         //debo buscar el producto
         var prod = repoProducto.ProductoPorID(id);
         //controlar
-
+        if (prod is null) return View();
         return View(prod);
     }
 
@@ -61,7 +61,7 @@ public class ProductosController : Controller
     [HttpPost] //form envia post o get luego no entra al controlador con delete
     public IActionResult Eliminar(int IdProducto) //debe coincidir /form
     {
-        Console.WriteLine(IdProducto);
+
         repoProducto.EliminarProducto(IdProducto);
         return RedirectToAction("index", "Productos");
     }
