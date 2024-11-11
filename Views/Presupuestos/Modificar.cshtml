@@ -1,0 +1,108 @@
+@model Presupuesto
+@{
+
+    ViewData["Title"] = "Modificar";
+}
+<h4 class="text-start mt-2 m-3">Cliente: @Model.NombreDestinatario</h4>
+<h5 class="text-start m-3">Fecha: @Model.FechaCreacion.Date.ToShortDateString()</h5>
+
+
+<table class="table table-bordered m-2">
+    <thead>
+        <tr>
+            <th hidden scope="col" class="text-center">Id</th>
+            <th scope="col" class="text-center">Producto</th>
+            <th scope="col" class="text-center">Cantidad</th>
+            <th scope="col" class="text-center">Precio Unitario</th>
+            <th scope="col" class="text-center">Importe</th>
+            <th scope="col" class="text-center"></th>
+            <th scope="col" class="text-center"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in @Model.Detalle)
+        {
+            <tr>
+                <td hidden class="text-center">@p.ProductoD.IdProducto</td>
+                <td class="text-center">@p.ProductoD.Descripcion</td>
+                <td class="text-center">@p.Cantidad</td>
+                <td class="text-center">@p.ProductoD.Precio</td>
+                <td class="text-center">@(p.Cantidad * p.ProductoD.Precio)</td>
+                <td class="text-center">
+                    <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                        onclick="ObtenerIDs(@p.ProductoD.IdProducto,@p.Cantidad)">
+                        <i class="bi bi-pencil text-light"></i>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropEliminar"
+                        onclick="idProducto(@p.ProductoD.IdProducto)">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!---- MODAL MODIFICAR ------>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modificar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" asp-controller="Presupuestos" asp-action="ModificarProducto">
+                <div class="modal-body">
+
+                    <input type="hidden" id="idProductoModificar" name="idProducto" value=" " class="form-control" />
+                    <input type="hidden" id="idPresupuesto" name="idPresupuesto" value="@Model.IdPresupuesto"
+                        class="form-control" />
+                    <label for="cantidad">Cantidad: </label>
+                    <input type="number" min="1" max="10" name="cantidad" id="cantidad" value="" required />
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
+                    <button class="btn btn-success" type="submit">Aceptar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!---- MODAL ELIMINAR ------>
+<div class="modal fade" id="staticBackdropEliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropEliminar" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropEliminar">Eliminar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" asp-controller="Presupuestos" asp-action="EliminarProducto">
+                <div class="modal-body">
+
+
+                    <input type="hidden" id="idPresupuesto" name="idPresupuesto" value="@Model.IdPresupuesto"
+                        class="form-control" />
+                    <input type="hidden" id="idProductoEliminar" name="idProducto" value="" class="form-control" />
+
+                    <p>¿Estás seguro que deseas eliminar el producto?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
+                    <button class="btn btn-danger" type="submit">Aceptar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function ObtenerIDs(idP, cantidad) {
+
+        document.getElementById('idProductoModificar').value = idP;
+        document.getElementById('cantidad').value = cantidad;
+    }
+</script>

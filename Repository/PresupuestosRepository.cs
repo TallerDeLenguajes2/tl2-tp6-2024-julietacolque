@@ -56,8 +56,7 @@ public class PresupuestosRepository : IPresupuestosRepository
     {
         var presupuesto = new Presupuesto();
         using var conexion = new SqliteConnection(cadenaConexion);
-        var query = @"SELECT  P.idPresupuesto, P.NombreDestinatario,P.FechaCreacion,PR.idProducto, PR.Descripcion AS Producto, PR.Precio, PD.Cantidad,
-                      (PR.Precio * PD.Cantidad) AS Subtotal
+        var query = @"SELECT P.idPresupuesto, P.NombreDestinatario,P.FechaCreacion,PR.idProducto, PR.Descripcion AS Producto, PR.Precio, PD.Cantidad
                       FROM 
                       Presupuestos P
                       JOIN 
@@ -65,7 +64,7 @@ public class PresupuestosRepository : IPresupuestosRepository
                       JOIN 
                       Productos PR ON PD.idProducto = PR.idProducto
                       WHERE 
-                      P.idPresupuesto = @id;";
+                      P.idPresupuesto = @id";
 
         conexion.Open();
         using var comando = new SqliteCommand(query, conexion);
@@ -102,6 +101,7 @@ public class PresupuestosRepository : IPresupuestosRepository
                 presupuesto.Detalle.Add(presupuestoD);
 
             }
+            conexion.Close();
         }
         return presupuesto;
     }
@@ -146,4 +146,32 @@ public class PresupuestosRepository : IPresupuestosRepository
         conexion.Close();
 
     }
+    public void ModificarPresupuesto(Presupuesto presupuesto, int idProducto, int cantidad)
+    {
+        using var conexion = new SqliteConnection(cadenaConexion);
+        var query = @"Update PresupuestosDetalle SET cantidad = @cant WHERE idPresupuesto=@idPre AND idProducto=@idProd";
+        conexion.Open();
+        using (var comando = new SqliteCommand(query, conexion))
+        {
+            comando.Parameters.Add(new SqliteParameter("@idPre", presupuesto.IdPresupuesto));
+            comando.Parameters.Add(new SqliteParameter("@idProd", idProducto));
+            comando.Parameters.Add(new SqliteParameter("@cant", cantidad));
+            comando.ExecuteNonQuery();
+        }
+        conexion.Close();
+
+    }
+    public void EliminarProducto(int idPresupuesto,int idProducto){
+         using var conexion = new SqliteConnection(cadenaConexion);
+         var query = @"DELETE FROM presupuestosDetalle WHERE idPresupuesto=@idPre AND idProducto=@idProd";
+         conexion.Open();
+          using (var comando = new SqliteCommand(query, conexion))
+        {
+            comando.Parameters.Add(new SqliteParameter("@idPre", idPresupuesto));
+            comando.Parameters.Add(new SqliteParameter("@idProd", idProducto));
+            comando.ExecuteNonQuery();
+        }
+        conexion.Close();
+    }
+  
 }

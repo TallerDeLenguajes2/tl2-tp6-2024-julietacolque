@@ -12,18 +12,18 @@
 
         <div class="row mb-3">
 
-            <label for="Descripcion" class="col-sm-2 col-form-label">Descripcion: </label>
+            <label asp-for="Descripcion" class="col-sm-2 col-form-label">Descripcion: </label>
             <div class="col-sm-4">
-                <input type="text" id="Descripcion" name="Descripcion" class="form-control" value="@Model.Descripcion"
-                    required />
+                <input asp-for="Descripcion" type="text" id="Descripcion" name="Descripcion" class="form-control"
+                    value="@Model.Descripcion" required />
             </div>
         </div>
 
         <div class="row mb-3">
-            <label for="Precio" class="col-sm-2 col-form-label">Precio: </label>
+            <label asp-for="Precio" class="col-sm-2 col-form-label">Precio: </label>
             <div class="col-sm-4">
-                <input type="number" id="Precio" name="Precio" class="form-control" value="@Model.Precio" required
-                    min="0" step="0.01" />
+                <input asp-for="Precio" type="number" id="Precio" name="Precio" class="form-control"
+                    value="@Model.Precio" required min="0" step="0.01" />
             </div>
         </div>
 
