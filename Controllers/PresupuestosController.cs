@@ -26,13 +26,23 @@ public class PresupuestosController : Controller
     public IActionResult Detalle(int id)
     {
         //asp-route-id => en el controlador debe esperar un "id"     
-        var presupuestoD = repoPresupuesto.PresupuestoDetallePorID(id);
-        return View(presupuestoD);
+        var presupuesto = repoPresupuesto.PresupuestoDetallePorID(id);
+        if (presupuesto.IdPresupuesto == 0)
+        {
+            var presupuestoVacio = repoPresupuesto.ListarPresupuestos().FirstOrDefault(p => p.IdPresupuesto == id);
+            return View(presupuestoVacio);
+        }
+        return View(presupuesto);
     }
     [HttpGet]
     public IActionResult Modificar(int id)
     {
         var presupuesto = repoPresupuesto.PresupuestoDetallePorID(id);
+        if (presupuesto.IdPresupuesto == 0)
+        {
+            var presupuestoVacio = repoPresupuesto.ListarPresupuestos().FirstOrDefault(p => p.IdPresupuesto == id);
+            return View(presupuestoVacio);
+        }
         return View(presupuesto);
     }
     [HttpPost]
@@ -50,6 +60,26 @@ public class PresupuestosController : Controller
         return RedirectToAction("Modificar", new { id = idPresupuesto });
 
     }
+
+    [HttpGet]
+    public IActionResult Crear()
+    {
+        return View(new Presupuesto());
+    }
+
+    [HttpPost]
+    public IActionResult AddPresupuesto(string nombreDestinatario)
+    {
+
+        var presupuesto = new Presupuesto
+        {
+            NombreDestinatario = nombreDestinatario,
+            FechaCreacion = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
+        };
+        repoPresupuesto.CrearPresupuesto(presupuesto);
+        return RedirectToAction("index", "Presupuestos");
+    }
+
     [HttpGet]
     public IActionResult CargarProducto(int idPresupuesto)
     {
@@ -85,4 +115,11 @@ public class PresupuestosController : Controller
         return RedirectToAction("Modificar", new { id = idPresupuesto });
     }
 
+       [HttpPost] //form envia post o get luego no entra al controlador con delete
+    public IActionResult Eliminar(int idPresupuesto) //debe coincidir /form
+    {
+
+        repoPresupuesto.EliminarPresupuesto(idPresupuesto);
+        return RedirectToAction("index", "Presupuestos");
+    }
 }

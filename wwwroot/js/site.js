@@ -8,6 +8,11 @@ function idProducto(id) {
 }
 
 
+function idPresupuesto(id) {
+    document.getElementById('idPresupuesto').value = id;
+}
+
+
 function ObtenerIDs(idP, cantidad) {
 
     document.getElementById('idProductoModificar').value = idP;

@@ -35,7 +35,6 @@ public class ProductosController : Controller
     {
         repoProducto.CrearProducto(producto);
         return RedirectToAction("index", "Productos");
-
     }
 
     [HttpGet]

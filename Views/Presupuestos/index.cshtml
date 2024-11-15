@@ -6,7 +6,7 @@
 }
 
 <h2 class="text-center m-3 fw-bold">Presupuestos</h2>
-<div class="d-flex justify-content-end"><a asp-asp-controller="" asp-action=""
+<div class="d-flex justify-content-end"><a asp-controller="Presupuestos" asp-action="Crear"
         class="btn btn-success m-2 "><i class="bi bi-plus-lg"></i></a>
 </div>
 <table class="table table-bordered m-2 mb-5">
@@ -35,7 +35,7 @@
                 </td>
                 <td class="text-center">
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                        onclick="idProducto(@p.IdPresupuesto)"><i class="bi bi-trash"></i></button>
+                        onclick="idPresupuesto(@p.IdPresupuesto)"><i class="bi bi-trash"></i></button>
                 </td>
 
 
@@ -43,3 +43,30 @@
         }
     </tbody>
 </table>
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Eliminar Presupuesto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" asp-controller="Presupuestos" asp-action="Eliminar">
+                <div class="modal-body">
+
+                    <p>¿Estás seguro que deseas eliminar el presupuesto?</p>
+                    <input type="hidden" id="idPresupuesto" name="idPresupuesto" value="" class="form-control" />
+
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
