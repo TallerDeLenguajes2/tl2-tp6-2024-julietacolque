@@ -6,11 +6,13 @@
 }
 
 <h2 class="text-center m-3 fw-bold">Presupuestos</h2>
-
-<table class="table table-bordered m-2">
+<div class="d-flex justify-content-end"><a asp-asp-controller="" asp-action=""
+        class="btn btn-success m-2 "><i class="bi bi-plus-lg"></i></a>
+</div>
+<table class="table table-bordered m-2 mb-5">
     <thead>
         <tr>
-            <th hidden scope="col" class="text-center">Id</th>
+            <th  scope="col" class="text-center">Id</th>
             <th scope="col" class="text-center">Cliente</th>
             <th scope="col" class="text-center">Fecha</th>
             <th scope="col" class="text-center"></th>
@@ -21,18 +23,19 @@
         @foreach (var p in @Model)
         {
             <tr>
-                <td hidden class="text-center">@p.IdPresupuesto</td>
-                <td class="text-center"><a asp-controller="Presupuestos" asp-action="Detalle" asp-route-id="@p.IdPresupuesto"
-                        class="text-decoration-none text-dark">@p.NombreDestinatario</a> </td>
+                <td  class="text-center">@p.IdPresupuesto</td>
+                <td class="text-center"><a asp-controller="Presupuestos" asp-action="Detalle"
+                        asp-route-id="@p.IdPresupuesto" class="text-decoration-none text-dark">@p.NombreDestinatario</a>
+                </td>
                 <td class="text-center">@p.FechaCreacion.ToShortDateString()</td>
 
                 <td class="text-center">
                     <a asp-controller="Presupuestos" asp-action="Modificar" asp-route-id="@p.IdPresupuesto"
-                        class="btn btn-warning ">Modificar</a>
+                        class="btn btn-warning "> <i class="bi bi-pencil text-light"></i></a>
                 </td>
                 <td class="text-center">
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                        onclick="idProducto(@p.IdPresupuesto)">Eliminar</button>
+                        onclick="idProducto(@p.IdPresupuesto)"><i class="bi bi-trash"></i></button>
                 </td>
 
 

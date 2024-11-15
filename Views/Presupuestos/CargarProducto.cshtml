@@ -1,0 +1,43 @@
+@model tl2_tp6_2024_julietacolque.ViewModels.AgregarProductoViewModel
+@{
+    ViewData["Title"] = "Cargar Producto";
+}
+
+
+<!---- button submit  lleva el producto-->
+
+
+
+<div class="container mt-5 mb-5">
+    <h2 class="mb-4">Cargar Producto</h2>
+
+    <form method="post" asp-controller="Presupuestos" asp-action="AddProducto">
+        <div class="row mb-3">
+
+            <input hidden id="idPresupuesto" name="idPresupuesto" value="@Model.IdPresupuesto ">
+
+            <label for="idProducto" class="col-sm-2 col-form-label">Descripcion: </label>
+            <div class="col-sm-4">
+                <select id= "idProducto"  name = "idProducto" class="form-select" aria-label="Default select example">
+                    @foreach (var prod in Model.ListaProductos){
+                           <option value="@prod.IdProducto">@prod.Descripcion</option>
+                    }       
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Cantidad" class="col-sm-2 col-form-label">Cantidad: </label>
+            <div class="col-sm-4">
+                <input for="Cantidad" type="number" id="Cantidad" name="Cantidad" class="form-control" required min="1"
+                    max="10" />
+            </div>
+        </div>
+
+        <div class="d-flex justify-content gap-2">
+            <a asp-controller="Presupuestos" asp-action="Modificar" asp-route-id="@Model"
+                class="btn btn-primary">Cancelar</a>
+            <button class="btn btn-success" type="submit">Guardar</button>
+        </div>
+    </form>
+</div>

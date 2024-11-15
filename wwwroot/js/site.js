@@ -6,3 +6,10 @@
 function idProducto(id) {
     document.getElementById('idProductoEliminar').value = id;
 }
+
+
+function ObtenerIDs(idP, cantidad) {
+
+    document.getElementById('idProductoModificar').value = idP;
+    document.getElementById('cantidad').value = cantidad;
+}

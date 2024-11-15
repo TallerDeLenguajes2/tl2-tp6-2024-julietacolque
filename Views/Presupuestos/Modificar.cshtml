@@ -3,9 +3,11 @@
 
     ViewData["Title"] = "Modificar";
 }
-<h4 class="text-start mt-2 m-3">Cliente: @Model.NombreDestinatario</h4>
-<h5 class="text-start m-3">Fecha: @Model.FechaCreacion.Date.ToShortDateString()</h5>
-
+<h4 class="text-start mt-5 m-3"> <b>Cliente:</b> @Model.NombreDestinatario</h4>
+<h5 class="text-start m-3"><b>Fecha: </b> @Model.FechaCreacion.Date.ToShortDateString()</h5>
+<div class="d-flex justify-content-end m-3"><a asp-asp-controller="Presupuestos" asp-action="CargarProducto"
+        asp-route-idPresupuesto="@Model.IdPresupuesto" class="btn btn-success  mb-3 "><i class="bi bi-plus-lg"></i></a>
+</div>
 
 <table class="table table-bordered m-2">
     <thead>
@@ -99,10 +101,3 @@
         </div>
     </div>
 </div>
-<script>
-    function ObtenerIDs(idP, cantidad) {
-
-        document.getElementById('idProductoModificar').value = idP;
-        document.getElementById('cantidad').value = cantidad;
-    }
-</script>
